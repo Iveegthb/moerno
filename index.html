@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ivy Moreno · Aspiring Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#18141f;        /* deep aubergine */
+  --surface:#221c2d;
+  --surface-2:#2b2338;
+  --line:#3a3049;
+  --text:#ede7f3;
+  --muted:#a99fba;
+  --mauve:#cfa5e0;     /* main accent */
+  --gold:#e4c27c;
+  --sage:#93c6a9;
+  --coral:#ea9489;
+  --sky:#8fb8e8;
+  --todo:#e4c27c;
+  --serif:"Fraunces",Georgia,serif;
+  --sans:"DM Sans",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+html{scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font:400 17px/1.7 var(--sans);
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+/* one slow glow, the only ambient motion */
+body::before{
+  content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;
+  background:radial-gradient(520px 420px at 15% 10%,rgba(207,165,224,.16),transparent 70%),
+             radial-gradient(480px 380px at 90% 85%,rgba(228,194,124,.08),transparent 70%);
+  animation:drift 22s ease-in-out infinite alternate;
+}
+@keyframes drift{to{transform:translate(3%,2%) scale(1.06)}}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--mauve);outline-offset:3px;border-radius:4px}
+
+.layout{max-width:1120px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:320px 1fr;gap:72px}
+
+/* Sidebar */
+aside{position:sticky;top:0;align-self:start;height:100vh;padding:64px 0 40px;display:flex;flex-direction:column}
+h1{font:600 clamp(44px,5vw,58px)/1.02 var(--serif);letter-spacing:-.02em;margin:0 0 16px}
+.role{color:var(--mauve);font-weight:500;margin:0 0 16px;line-height:1.5}
+.blurb{color:var(--muted);margin:0 0 32px;max-width:32ch;font-size:16px}
+aside nav{display:flex;flex-direction:column;gap:6px;margin-bottom:auto}
+aside nav a{width:max-content;text-decoration:none;color:var(--muted);padding:4px 0 4px 14px;border-left:2px solid var(--line);transition:color .2s,border-color .2s}
+aside nav a:hover,aside nav a:focus-visible{color:var(--text);border-color:var(--mauve)}
+.contact{display:flex;flex-direction:column;gap:6px;font-size:15px;color:var(--muted)}
+.contact a{text-decoration:none;color:var(--text)}
+.contact a:hover{color:var(--mauve)}
+
+/* Main */
+main{padding:64px 0 24px}
+section{padding:0 0 72px}
+h2{font:600 30px/1.2 var(--serif);margin:0 0 10px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 28px;max-width:58ch}
+.lead{font:400 clamp(21px,2.4vw,26px)/1.55 var(--serif);max-width:34ch;margin:0 0 22px}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:13px var(--mono);padding:4px 11px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--text)}
+
+/* Stack */
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:30px}
+.stack h3{margin:0 0 12px;font:500 15px var(--sans);color:var(--gold)}
+
+/* Projects (click to open) */
+.projects{display:grid;gap:14px}
+details{--c:var(--mauve);background:var(--surface);border:1px solid var(--line);border-radius:14px;transition:border-color .2s,background .2s}
+details:hover{border-color:color-mix(in srgb,var(--c) 55%,var(--line))}
+details[open]{background:var(--surface-2);border-color:var(--c)}
+summary{list-style:none;cursor:pointer;padding:22px 26px;display:grid;grid-template-columns:1fr auto;gap:6px 20px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary h3{margin:0;font:600 22px/1.3 var(--serif)}
+.cat{grid-column:1;color:var(--c);font-size:14px;font-weight:500;margin:0}
+.plus{grid-row:1/3;grid-column:2;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--c);font:400 20px/1 var(--sans);transition:transform .25s,background .2s}
+details[open] .plus{transform:rotate(45deg);background:color-mix(in srgb,var(--c) 18%,transparent)}
+.body{padding:0 26px 26px;display:grid;gap:14px}
+.body p{margin:0;max-width:64ch}
+.body .chip{border-color:var(--coral);background:color-mix(in srgb,var(--c) 12%,transparent)}
+.skills{color:var(--muted);font-size:15px}
+.links{display:flex;flex-wrap:wrap;gap:10px;padding-top:4px}
+.links a,.links span{font:13px var(--mono);padding:8px 14px;border-radius:8px;border:1px solid var(--line);text-decoration:none}
+.links a{color:var(--c);border-color:var(--c);transition:background .2s}
+.links a:hover{background:color-mix(in srgb,var(--c) 16%,transparent)}
+.links span{color:var(--todo);border-style:dashed}
+.todo{color:var(--todo);font:13px var(--mono)}
+
+/* Learning */
+.learn{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 28px;padding:0;margin:0;list-style:none}
+.learn li{padding:11px 0;border-bottom:1px solid var(--line)}
+
+/* Mindset */
+.mind{font:400 clamp(24px,3vw,32px)/1.35 var(--serif);max-width:24ch;margin:0 0 14px;color:var(--sage)}
+.mind-sub{color:var(--muted);max-width:54ch;margin:0}
+
+footer{border-top:1px solid var(--line);padding:28px 0 56px;color:var(--muted);font-size:15px}
+
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr;gap:0}
+  aside{position:static;height:auto;padding:48px 0 8px}
+  aside nav{flex-direction:row;flex-wrap:wrap;gap:6px 18px;margin-bottom:24px}
+  aside nav a{border-left:0;padding:2px 0}
+  .contact{margin-bottom:8px}
+  main{padding-top:40px}
+}
+@media(prefers-reduced-motion:reduce){body::before{animation:none}html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside>
+  <h1>Ivy<br>Moreno</h1>
+  <p class="role">Fresh BSIT Graduate<br>Aspiring Software Engineer</p>
+  <p class="blurb">I build small, practical apps and learn something new from each one.</p>
+  <nav aria-label="Sections">
+    <a href="#about">About</a>
+    <a href="#stack">Tech stack</a>
+    <a href="#projects">Projects</a>
+    <a href="#learning">Learning</a>
+    <a href="#mindset">Mindset</a>
+  </nav>
+  <div class="contact">
+    <a href="https://github.com/Iveegthb" target="_blank" rel="noopener">github.com/Iveegthb</a>
+    <a href="mailto:ivym1132@gmail.com">ivym1132@gmail.com</a>
+    <a href="https://www.linkedin.com/in/ivy-moreno-b15b04403/" target="_blank" rel="noopener">linkedin.com/in/ivy-moreno-b15b04403</a>
+  </div>
+</aside>
+
+<main>
+<section id="about">
+  <p class="lead">I just finished my BSIT and I'm looking for an entry-level software engineering role.</p>
+  <p class="sub">My experience comes from academic and personal projects in C++, C#, Java and web development, plus a mobile UI/UX prototype in Figma.</p>
+  <div class="chips"><span class="chip">Entry-level developer</span><span class="chip">Academic projects</span><span class="chip">Continuous learner</span></div>
+</section>
+
+<section id="stack">
+  <h2>Technologies I have worked with</h2>
+  <p class="sub">At a beginner to entry level. I'm still growing in each of these.</p>
+  <div class="stack">
+    <div><h3>Languages</h3><div class="chips"><span class="chip">C++</span><span class="chip">C#</span><span class="chip">Java</span><span class="chip">PHP</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div></div>
+    <div><h3>Tools</h3><div class="chips"><span class="chip">Visual Studio</span><span class="chip">VS Code</span><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Figma</span><span class="chip">Canva</span><span class="chip">Microsoft Office</span></div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <p class="sub">Five projects across different languages. Click one to see details and links.</p>
+  <div class="projects">
+
+    <details style="--c:var(--sky)" open>
+      <summary><h3>Binary Calculator</h3><span class="plus" aria-hidden="true">+</span><p class="cat">C++ programming · Calculator application</p></summary>
+      <div class="body">
+        <p>A command-line calculator that performs arithmetic operations on binary numbers.</p>
+        <div class="chips"><span class="chip">C++</span></div>
+        <p class="skills">Skills demonstrated: <span class="todo">[VERIFY FROM C++ SOURCE CODE]</span></p>
+      </div>
+    </details>
+
+    <details style="--c:var(--mauve)">
+      <summary><h3>Enrollment System</h3><span class="plus" aria-hidden="true">+</span><p class="cat">Desktop application · Windows Forms</p></summary>
+      <div class="body">
+        <p>A C# Windows Forms enrollment system built as an academic project, with interfaces for administrative, student and faculty tasks such as login, sign-up, attendance and grade entry.</p>
+        <div class="chips"><span class="chip">C#</span><span class="chip">Windows Forms</span><span class="chip">Visual Studio</span></div>
+        <p class="skills">Skills demonstrated: C# application development, multi-screen interface flow. <span class="todo">[NEEDS VERIFICATION against source]</span></p>
+      </div>
+    </details>
+
+    <details style="--c:var(--coral)">
+      <summary><h3>E Console Store POS System</h3><span class="plus" aria-hidden="true">+</span><p class="cat">Java · Object-oriented programming · Academic project</p></summary>
+      <div class="body">
+        <p>A beginner Java project built around OOP. It is a system where customers can buy game consoles online; features and OOP concepts will be listed after I review the source code.</p>
+        <div class="chips"><span class="chip">Java</span></div>
+        <p class="skills">Skills demonstrated: <span class="todo">[VERIFY FROM JAVA SOURCE CODE]</span></p>
+        <div class="links"><a href="https://www.facebook.com/share/v/195aft2Xaw/" target="_blank" rel="noopener">View documentation</a></div>
+      </div>
+    </details>
+
+    <details style="--c:var(--sage)">
+      <summary><h3>Digital Finance Buddy</h3><span class="plus" aria-hidden="true">+</span><p class="cat">Web development · Front end</p></summary>
+      <div class="body">
+        <p>A browser-based budget and expense tracker. Set a total budget, add expenses, and see the remaining balance. Entries can be edited or deleted, and inputs are validated.</p>
+        <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
+        <p class="skills">Skills demonstrated: HTML structure, responsive CSS, DOM manipulation, event handling, input validation.</p>
+      </div>
+    </details>
+
+    <details style="--c:var(--gold)">
+      <summary><h3>Habitize</h3><span class="plus" aria-hidden="true">+</span><p class="cat">UI/UX design · Mobile app prototype</p></summary>
+      <div class="body">
+        <p>A mobile daily planner application designed for students to organize tasks, track habits and manage study schedules. The prototype explores a clean, focused interface for adding and reviewing daily goals, habit streaks, and calendar integration.</p>
+        <div class="chips"><span class="chip">Figma</span></div>
+        <p class="skills">Skills demonstrated: mobile interface design, prototyping, interaction design, user flow planning.</p>
+        <div class="links"><a href="https://www.figma.com/design/XqAYDW2AVYdkmEsU7ouImq/Habitize---Daily-Planner-Mobile-Application-For-Students--Community-/?node-id=0-1&p=f&t=UuDFXiLINZWHD392-0" target="_blank" rel="noopener">View Figma design</a></div>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<section id="learning">
+  <h2>Currently learning</h2>
+  <p class="sub">Where I'm putting my practice time right now.</p>
+  <ul class="learn">
+    <li>Programming fundamentals</li><li>C++, C#, Java and PHP</li><li>Web development</li><li>Software engineering concepts</li><li>Git and GitHub workflow</li><li>Building practical applications</li><li>Project documentation</li><li>Clean, maintainable code</li>
+  </ul>
+</section>
+
+<section id="mindset">
+  <h2>Developer mindset</h2>
+  <p class="mind">Learn it, build it, break it, fix it, and try again.</p>
+  <p class="mind-sub">I see software development as a process of learning, making mistakes and improving. Perseverance is what moves a project forward.</p>
+</section>
+
+<footer>Ivy Moreno · Fresh BSIT Graduate</footer>
+</main>
+
+</div>
+</body>
+</html>
